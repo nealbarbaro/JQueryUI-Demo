@@ -32,8 +32,14 @@ $(document).ready(function(){
   $("#animate").on("click", animate_bio);
 
  // Show
+
+ var do_a_callback = function(){
+  alert("Nice moves, Picard");
+ }
+
+
  var show_picard_bouncer = function() {
-  $("#picard_bouncer").show('bounce');
+  $("#picard_bouncer").show('bounce', {}, 4000, do_a_callback);
  };
 
  $("#show").on("click", show_picard_bouncer);
