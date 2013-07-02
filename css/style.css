@@ -11,3 +11,17 @@ body {
 #picard{
   width: 100px;
 }
+
+#bio{
+  background-color: blue;
+  width: 300px;
+  border: 1px solid white;
+}
+
+#bio h4{
+  color: #fff;
+}
+
+#bio p{
+  color: #999;
+}
