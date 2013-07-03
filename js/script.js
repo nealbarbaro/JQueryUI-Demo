@@ -1,4 +1,39 @@
 $(document).ready(function(){
+
+  // AJAX!!!!
+
+  var response_area = $("#response");
+
+  var do_this_after = function() {
+    response_area.text("Received response.");
+  }
+
+
+  var my_amazing_ajax_button = function() {
+    $.ajax({
+      type: "POST", // METHOD like "get"
+      url: "http://examples.webscript.io/coinflip",
+      // data: {
+      //   name: "Sumeet",
+      //   age: 27,
+      //   height: "tall"
+      // },
+      beforeSend: function() {
+        response_area.text("Loading...");
+      },
+      complete: function(response, status_text){
+        console.log(response.responseText);
+        console.log(status_text);
+      }
+    });
+  };
+
+  $("#ajax_button").on("click", my_amazing_ajax_button);
+
+
+
+
+
   // Drag Picard around.
   $("#picard" ).draggable();
   // Make accordion
