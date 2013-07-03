@@ -3,9 +3,59 @@ $(document).ready(function(){
   // AJAX!!!!
 
   var response_area = $("#response");
+  var headCount = 0;
+  var tailCount = 0;
+
+  var ajax_form_submit = function(event) {
+    $.ajax({
+      type: "POST",
+      url: "http://sumeetjain.com",
+      data: $('#my_form').serialize(),
+      beforeSend: function(){
+        console.log("beforeSend");
+      },
+      complete: function(){
+        console.log("complete");
+      }
+    });
+
+    event.preventDefault();
+  }
+
+  $("#form_button").on("click", ajax_form_submit);
+
+
 
   var do_this_after = function() {
     response_area.text("Received response.");
+  }
+
+  var change_background = function(response) {
+    var $body = $("body");
+    if (response.responseText == "heads") {
+      tailCount = 0;
+      headCount++;
+      $body.removeClass();
+      $body.addClass("heads");
+      if (headCount > 2){
+        response_area.html("<h1>HEADS STREAK!!!!</h1>");
+      }
+      else {
+        response_area.html("<h1>" + response.responseText.toUpperCase() + "</h1>");
+      };
+    }
+    if (response.responseText == "tails") {
+      tailCount++;
+      headCount = 0;
+      $body.removeClass();
+      $body.addClass("tails");
+      if (tailCount > 2){
+        response_area.html("<h1>TAILS STREAK!!!!</h1>");
+      }
+      else {
+        response_area.html("<h1>" + response.responseText.toUpperCase() + "</h1>");
+      }
+    }
   }
 
 
@@ -22,8 +72,7 @@ $(document).ready(function(){
         response_area.text("Loading...");
       },
       complete: function(response, status_text){
-        console.log(response.responseText);
-        console.log(status_text);
+        change_background(response);
       }
     });
   };
